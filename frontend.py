@@ -4,8 +4,8 @@ from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, System
 
 CONFIG = {"configurable": {"thread_id": "thread-1"}}
 
-import os
-st.write("KEY EXISTS:", bool(os.getenv("HUGGINGFACEHUB_API_TOKEN")))
+# import os
+# st.write("KEY EXISTS:", bool(os.getenv("HUGGINGFACEHUB_API_TOKEN")))
 
 
 if "messages" not in st.session_state:
