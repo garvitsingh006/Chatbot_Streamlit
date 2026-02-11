@@ -8,6 +8,8 @@ os.environ["LANGCHAIN_PROJECT"] = "chatbot_streamlit"
 
 st.write(os.getenv("LANGCHAIN_API_KEY"))
 st.write(os.getenv("LANGCHAIN_TRACING"))
+st.write(dict(os.environ))
+
 
 # **************************************** utility functions *************************
 
