@@ -1,7 +1,11 @@
 from langgraph.graph import StateGraph, START, END, MessagesState
 from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
+from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
+import sqlite3
+import backend
+print(dir(backend))
 
 load_dotenv()
 
@@ -21,7 +25,8 @@ def chat_node(state: State) -> State:
         "messages": [response]
     }
 
-checkpointer = MemorySaver()
+conn = sqlite3.connect('chatbot.db', check_same_thread=False)
+checkpointer = SqliteSaver(conn=conn)
 graph = StateGraph(State)
 
 graph.add_node("chat_node", chat_node)
@@ -30,3 +35,9 @@ graph.add_edge(START, "chat_node")
 graph.add_edge("chat_node", END)
 
 chatbot = graph.compile(checkpointer = checkpointer)
+
+def retrieve_all_threads():
+    all_threads = set()
+    for checkpoint in checkpointer.list(None):
+        all_threads.add(checkpoint.config["configurable"]["thread_id"])
+    return list(all_threads)
