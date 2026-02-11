@@ -4,8 +4,6 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
 import sqlite3
-import backend
-print(dir(backend))
 
 load_dotenv()
 
