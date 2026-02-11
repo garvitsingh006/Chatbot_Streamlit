@@ -5,6 +5,9 @@ from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
 import sqlite3
 
+import os
+
+
 load_dotenv()
 
 llm = HuggingFaceEndpoint(

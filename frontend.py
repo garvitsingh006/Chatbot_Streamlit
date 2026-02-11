@@ -5,6 +5,10 @@ import uuid
 import os
 os.environ["LANGCHAIN_PROJECT"] = "chatbot_streamlit"
 
+
+st.write(os.getenv("LANGCHAIN_API_KEY"))
+st.write(os.getenv("LANGCHAIN_TRACING"))
+
 # **************************************** utility functions *************************
 
 def generate_thread_id():
