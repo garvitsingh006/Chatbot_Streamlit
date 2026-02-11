@@ -24,6 +24,14 @@ def load_conversation(thread_id):
     # Check if messages key exists in state values, return empty list if not
     return state.values.get('messages', [])
 
+def generate_chat_name(thread_id):
+    messages = load_conversation(thread_id)
+    if messages:
+        first_message = messages[0]
+        if isinstance(first_message, HumanMessage):
+            return first_message.content[:20]  # Use the first 20 characters of the first user message as the chat name
+    return str(thread_id)[:8]  # Fallback to using the thread ID if no messages are found
+
 
 # **************************************** Session Setup ******************************
 if 'message_history' not in st.session_state:
@@ -42,13 +50,14 @@ add_thread(st.session_state['thread_id'])
 
 st.sidebar.title('LangGraph Chatbot')
 
-if st.sidebar.button('New Chat'):
+if st.sidebar.button('Start a new chat'):
     reset_chat()
 
 st.sidebar.header('My Conversations')
 
 for thread_id in st.session_state['chat_threads'][::-1]:
-    if st.sidebar.button(str(thread_id)):
+    chat_name  = generate_chat_name(thread_id)
+    if st.sidebar.button(chat_name):
         st.session_state['thread_id'] = thread_id
         messages = load_conversation(thread_id)
 
