@@ -59,7 +59,7 @@ st.sidebar.header('My Conversations')
 
 for thread_id in st.session_state['chat_threads'][::-1]:
     chat_name  = generate_chat_name(thread_id)
-    if st.sidebar.button(chat_name):
+    if st.sidebar.button(chat_name, key=str(thread_id)):
         st.session_state['thread_id'] = thread_id
         messages = load_conversation(thread_id)
 
