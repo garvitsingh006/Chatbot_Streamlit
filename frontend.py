@@ -4,6 +4,9 @@ import uuid
 import streamlit as st
 from backend import chatbot, retrieve_all_threads, submit_async_task
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
+import os
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
 
 # =========================== Utilities ===========================
 def generate_thread_id():
