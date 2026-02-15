@@ -6,3 +6,4 @@ langchain_core
 streamlit
 langgraph-checkpoint-sqlite
 langchain_mcp_adapters
+aiohttp
